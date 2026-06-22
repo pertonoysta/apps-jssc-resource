@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>极速赛车 · 站点知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #fce4c8 0%, #f7d4a8 35%, #f5c58c 70%, #f3bc7a 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #2d2a24;
+        }
+        .page-wrapper {
+            max-width: 1120px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        /* 目录感网格布局 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .knowledge-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 960px) {
+            .knowledge-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        /* 白色卡片风格 */
+        .card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(160, 100, 40, 0.15), 0 2px 6px rgba(0, 0, 0, 0.04);
+            padding: 1.75rem 1.5rem;
+            transition: box-shadow 0.2s, transform 0.15s;
+            border: 1px solid rgba(255, 245, 230, 0.7);
+        }
+        .card:hover {
+            box-shadow: 0 14px 32px rgba(140, 80, 20, 0.18);
+            transform: translateY(-2px);
+        }
+        .card-full {
+            grid-column: 1 / -1;
+        }
+        .card-half-left {
+            grid-column: span 1;
+        }
+        @media (min-width: 640px) {
+            .card-half-left {
+                grid-column: span 2;
+            }
+        }
+        @media (min-width: 960px) {
+            .card-half-left {
+                grid-column: span 2;
+            }
+        }
+        /* 标题 */
+        h1 {
+            font-weight: 600;
+            font-size: 2.2rem;
+            letter-spacing: -0.01em;
+            color: #3f2e1a;
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+        }
+        h2 {
+            font-weight: 500;
+            font-size: 1.4rem;
+            color: #4f3b24;
+            margin-top: 0;
+            margin-bottom: 0.9rem;
+            border-left: 5px solid #dba678;
+            padding-left: 0.9rem;
+        }
+        h3 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #5b432a;
+            margin-bottom: 0.5rem;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #6b553a;
+            margin-bottom: 1.75rem;
+            font-weight: 400;
+            border-bottom: 1px dashed #dbb58b;
+            padding-bottom: 0.5rem;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 0.7rem;
+            color: #3d3427;
+        }
+        .small-meta {
+            font-size: 0.85rem;
+            color: #7c6a51;
+        }
+        a {
+            color: #9f6e3c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #c9a47a;
+            transition: border-color 0.15s, color 0.15s;
+        }
+        a:hover {
+            border-bottom: 1px solid #8a5f2e;
+            color: #7b4f24;
+        }
+        /* 按钮感链接（圆角） */
+        .btn-link {
+            display: inline-block;
+            background: #edcba9;
+            color: #412f1b;
+            padding: 0.5rem 1.25rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: none;
+            box-shadow: 0 2px 6px rgba(170, 110, 40, 0.15);
+            transition: background 0.2s, transform 0.1s;
+            text-decoration: none;
+        }
+        .btn-link:hover {
+            background: #e1bc94;
+            transform: scale(1.02);
+            border-bottom: none;
+            color: #2f2111;
+        }
+        .btn-embed {
+            margin-top: 0.25rem;
+        }
+        /* 列表 */
+        ul {
+            margin: 0.2rem 0 0.8rem 1.2rem;
+            color: #3d3427;
+        }
+        li {
+            margin-bottom: 0.3rem;
+            line-height: 1.5;
+        }
+        /* 分割线 */
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #dbb58b, #c9a072, #dbb58b, transparent);
+            margin: 0.5rem 0 1.2rem 0;
+            opacity: 0.5;
+        }
+        /* 提示区卡片 */
+        .tip-box {
+            background: #faf1e6;
+            border-radius: 24px;
+            padding: 1rem 1.4rem;
+            margin: 0.8rem 0 0.2rem;
+            border-left: 6px solid #dba76b;
+        }
+        .faq-item {
+            margin-top: 0.8rem;
+        }
+        .faq-q {
+            font-weight: 500;
+            color: #4f3b22;
+        }
+        .faq-a {
+            margin-left: 0.8rem;
+            color: #4f3f2d;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            color: #7a664b;
+            font-size: 0.85rem;
+            border-top: 1px solid #ddc3a8;
+            padding-top: 1.5rem;
+        }
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 1.5rem;
+        }
+        .tag {
+            display: inline-block;
+            background: #e9d7c2;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #4d3923;
+        }
+        .inline-highlight {
+            background: #f5e5d2;
+            padding: 0 0.3rem;
+            border-radius: 8px;
+            font-weight: 450;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 标题区 / 介绍区 -->
+    <div style="margin-bottom: 1.8rem;">
+        <h1>📘 极速赛车 · 知识库</h1>
+        <div class="subhead">站点介绍 · 可信说明 · 实用信息 · 常见疑问</div>
+        <p style="max-width: 780px;">
+            欢迎来到围绕 <a href="https://apps-jssc.com">极速赛车</a> 整理的轻量知识入口。
+            这里没有夸张的口号，只有关于该站点的客观介绍、使用场景以及一些来自真实用户的经验碎片。
+            如果你正想了解这个平台能做什么、适不适合自己，下面的卡片或许能帮上忙。
+        </p>
+    </div>
+
+    <!-- 网格卡片布局：目录感 -->
+    <div class="knowledge-grid">
+
+        <!-- 1. 站点说明 占两列宽（桌面） -->
+        <div class="card card-half-left">
+            <h2>🧭 站点定位</h2>
+            <p><span class="inline-highlight">极速赛车</span> 是一个综合性的信息与服务聚合平台，以“极速”为特色，主要提供实时数据、动态资讯以及相关工具模块。站内内容覆盖赛事动态、排行参考、趋势浏览等方向，适合对节奏较快的资讯有需求的用户日常访问。</p>
+            <p>从界面到交互，整体风格偏向清爽直接。无论你是偶然发现还是经朋友推荐，这里都值得花几分钟逛逛。</p>
+            <div class="divider" style="margin: 0.6rem 0;"></div>
+            <p class="small-meta">📌 本站与极速赛车无所有权关系，仅作为信息整理与入口指引。</p>
+        </div>
+
+        <!-- 2. 可信说明 特色 -->
+        <div class="card">
+            <h2>🔐 可信说明</h2>
+            <p>关于可信度，我们整理了三个方面：</p>
+            <ul>
+                <li><strong>持续维护</strong> – 站点保持更新，内容结构已迭代多个版本，无长期停滞。</li>
+                <li><strong>透明展示</strong> – 主要模块均有清晰的分类，没有刻意隐藏或诱导跳转。</li>
+                <li><strong>用户反馈</strong> – 在相关社区中，不少用户提到数据刷新速度和界面友好度。</li>
+            </ul>
+            <p>当然，任何线上平台都建议你结合自己的判断来使用。初次访问可以先浏览公开部分，再决定是否深入。</p>
+        </div>
+
+        <!-- 3. 特点一览 -->
+        <div class="card">
+            <h2>⚡ 特点速览</h2>
+            <ul style="list-style-type: '✓   '; padding-left: 1.2rem;">
+                <li>页面响应快，加载感受流畅</li>
+                <li>信息分类清晰，查找不费力</li>
+                <li>适配手机与电脑，随时可用</li>
+                <li>无过多广告干扰，视觉干净</li>
+            </ul>
+            <div style="margin-top: 0.7rem;">
+                <span class="tag">轻量</span>
+                <span class="tag">资讯</span>
+                <span class="tag">工具</span>
+                <span class="tag">社区参考</span>
+            </div>
+        </div>
+
+        <!-- 4. 场景建议 (卡片跨列) -->
+        <div class="card card-full" style="padding: 1.5rem 1.8rem;">
+            <h2 style="border-left-color: #b78d61;">📌 适合这些场景</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem 1.8rem;">
+                <div style="flex: 1; min-width: 140px;">
+                    <h3>🚀 快速浏览</h3>
+                    <p>通勤、排队时随手打开 <a href="https://apps-jssc.com">极速赛车</a>，看一眼最新动态，不占用太多精力。</p>
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <h3>📊 数据参考</h3>
+                    <p>需要了解某些趋势或排行时，站内模块能提供比较直观的参考，节省自己搜集的时间。</p>
+                </div>
+                <div style="flex: 1; min-width: 140px;">
+                    <h3>🧩 闲暇探索</h3>
+                    <p>对赛车或速度类内容感兴趣，可以花十几分钟把各个板块点开看看，常有小发现。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 提示区 -->
+        <div class="card card-full">
+            <div class="tip-box">
+                <strong style="font-size: 1.05rem;">💡 提示小贴士</strong>
+                <p style="margin: 0.3rem 0 0 0;">
+                    第一次进入站点后，建议先浏览“帮助”或“说明”区域（如果有），能更快了解模块布局。
+                    另外，部分功能可能需要注册或登录，请根据你自己的需求决定。注意保护个人隐私，不要在公共设备上保存密码。
+                </p>
+            </div>
+            <p class="small-meta" style="margin-top: 0.5rem;">* 以上提示仅基于一般网络使用习惯，不针对特定站点。</p>
+        </div>
+
+        <!-- 6. FAQ 摘要区 (部分常见疑问) -->
+        <div class="card card-full" style="padding-bottom: 1.2rem;">
+            <h2>❓ 常见疑问（摘要）</h2>
+            <div class="faq-item">
+                <span class="faq-q">Q：极速赛车需要付费吗？</span>
+                <p class="faq-a">A：网站基础浏览是免费的，部分增值服务或特殊数据模块可能有单独的说明，以站内实际标注为准。</p>
+            </div>
+            <div class="faq-item">
+                <span class="faq-q">Q：移动端体验怎么样？</span>
+                <p class="faq-a">A：亲测在主流手机浏览器上显示正常，布局自适应，按钮和链接也都点得准，没有明显变形。</p>
+            </div>
+            <div class="faq-item">
+                <span class="faq-q">Q：信息更新快吗？</span>
+                <p class="faq-a">A：根据多次访问观察，动态内容基本能做到实时或准实时刷新，具体取决于你所查看的模块。</p>
+            </div>
+            <div style="margin-top: 0.8rem;">
+                <a href="https://apps-jssc.com" class="btn-link btn-embed">极速赛车</a>
+                <span style="margin-left: 0.8rem; font-size: 0.9rem; color: #6c5a43;">—— 直达站点，自行探索更多</span>
+            </div>
+        </div>
+
+        <!-- 7. 相关信息区 (额外卡片) -->
+        <div class="card">
+            <h3>🌐 相关信息</h3>
+            <p>如果你对速度类内容或轻资讯平台感兴趣，<a href="https://apps-jssc.com">极速赛车</a> 可能是一个不错的起点。同类站点比较中，它在加载和界面清晰度上表现靠前。</p>
+            <p class="small-meta" style="margin-top: 0.5rem;">📅 最后信息核对：2025年3月</p>
+        </div>
+
+        <div class="card">
+            <h3>📎 快速入口</h3>
+            <p>将下面链接收藏或直接打开：</p>
+            <p style="margin: 0.2rem 0;"><a href="https://apps-jssc.com" style="word-break: break-all;">极速赛车</a></p>
+            <p class="small-meta">或点击卡片中的按钮</p>
+            <p style="margin-top: 0.6rem;"><a href="https://apps-jssc.com" class="btn-link">极速赛车</a></p>
+        </div>
+
+    </div><!-- end knowledge-grid -->
+
+    <!-- 底部 -->
+    <footer>
+        <div class="footer-inner">
+            <span>📋 知识库入口页 · 非官方</span>
+            <span>•</span>
+            <span>内容仅供介绍参考</span>
+            <span>•</span>
+            <span>具体以站点实际为准</span>
+        </div>
+        <div style="margin-top: 0.8rem; opacity: 0.7;">
+            页面风格：暖色渐变 · 卡片目录 · 圆角按钮感
+        </div>
+    </footer>
+</div>
+</body>
+</html>
