@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026世界杯 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f7f5ef;          /* 米白基调 */
+      font-family: 'Georgia', 'Times New Roman', '宋体', serif;
+      color: #2e2e2c;
+      line-height: 1.75;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffffd9;
+      padding: 2.8rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(1px);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border-left: 6px solid #b9975a;
+      padding-left: 1.2rem;
+      margin-bottom: 1.8rem;
+      color: #3b3a37;
+    }
+
+    .intro {
+      font-size: 1.05rem;
+      margin-bottom: 2.2rem;
+      color: #4a4844;
+    }
+
+    .directory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin: 2.5rem 0 2rem;
+    }
+
+    .card {
+      background: #faf8f2;
+      border-radius: 16px;
+      padding: 1.6rem 1.8rem 1.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ece8de;
+      transition: all 0.15s ease;
+    }
+
+    .card:hover {
+      border-color: #dac29a;
+      background: #f9f5ea;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.65rem;
+      color: #5a4e3a;
+      border-bottom: 1px dashed #d9cfb8;
+      padding-bottom: 0.35rem;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: #4d4a44;
+      margin-bottom: 0.4rem;
+    }
+
+    .card .meta {
+      font-size: 0.9rem;
+      color: #89816d;
+      margin-top: 0.6rem;
+      display: inline-block;
+      border-left: 2px solid #cbb58b;
+      padding-left: 0.7rem;
+    }
+
+    .notice-box {
+      background: #f2efe5;
+      border-left: 6px solid #b9975a;
+      padding: 1.25rem 2rem 1.25rem 1.8rem;
+      margin: 2rem 0 2.2rem;
+      border-radius: 0 16px 16px 0;
+      font-size: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+
+    .notice-box strong {
+      color: #5e4f34;
+      margin-right: 0.4rem;
+      font-weight: 600;
+    }
+
+    .info-area {
+      background: #ffffff;
+      border: 1px solid #e6dfcf;
+      border-radius: 18px;
+      padding: 1.8rem 2rem;
+      margin: 1.8rem 0 2.5rem;
+    }
+
+    .info-area h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #4f4639;
+      margin-bottom: 1rem;
+    }
+
+    .info-area ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-area li {
+      padding: 0.45rem 0 0.45rem 1.2rem;
+      position: relative;
+      border-bottom: 1px solid #f0ebe0;
+    }
+
+    .info-area li:last-child {
+      border-bottom: none;
+    }
+
+    .info-area li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #b28d5b;
+      font-size: 1.2rem;
+    }
+
+    .faq-mini {
+      margin: 2.4rem 0 1rem;
+      background: #fcfaf5;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+    }
+
+    .faq-mini h3 {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #4f4639;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px dotted #e0d9c7;
+    }
+
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #5f533d;
+      min-width: 7rem;
+    }
+
+    .faq-a {
+      color: #4b4841;
+      flex: 1;
+    }
+
+    .footer-note {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e6decd;
+      font-size: 0.9rem;
+      color: #7c7668;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    a {
+      color: #876f44;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: color 0.15s;
+    }
+
+    a:hover {
+      color: #b28d5b;
+      text-decoration-thickness: 2px;
+    }
+
+    /* 响应式 */
+    @media (max-width: 680px) {
+      body {
+        padding: 1.2rem 0.8rem 3rem;
+      }
+
+      .page-wrap {
+        padding: 1.8rem 1.2rem;
+      }
+
+      .directory-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        padding-left: 1rem;
+      }
+
+      .notice-box {
+        flex-direction: column;
+        padding: 1rem 1.2rem;
+      }
+
+      .info-area,
+      .faq-mini {
+        padding: 1.2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page-wrap {
+        padding: 1rem 0.8rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <h1>2026世界杯 · 稳定知识入口</h1>
+
+    <div class="intro">
+      <p>作为全球关注的顶级赛事，2026年美加墨世界杯将首次由三个国家联合举办。本页面作为信息型索引入口，整合赛事结构、背景阅读与实用提示，帮助读者快速建立起可靠的知识框架。以下内容基于公开资料与既往赛事规律整理，供研究与参考。</p>
+    </div>
+
+    <!-- 目录卡片：知识库入口式布局 -->
+    <div class="directory-grid">
+      <div class="card">
+        <h3>赛制概览</h3>
+        <p>48支球队分为16组，每组3队；小组前两名晋级32强淘汰赛。新增的附加赛与跨洲名额分配值得关注。</p>
+        <span class="meta">⏺ 已公布赛历草案</span>
+      </div>
+      <div class="card">
+        <h3>主办城市</h3>
+        <p>覆盖美国、加拿大、墨西哥共16座城市。其中墨西哥城阿兹特克体育场成为史上首个三次举办世界杯的球场。</p>
+        <span class="meta">📍 3国 · 16城</span>
+      </div>
+      <div class="card">
+        <h3>关键时间</h3>
+        <p>2026年6月11日开幕，7月19日决赛。预选赛已于2023年启动，各大洲出线名额分配逐渐明朗。</p>
+        <span class="meta">📅 39天赛程</span>
+      </div>
+      <div class="card">
+        <h3>历史参考</h3>
+        <p>过去22届赛事积累的战术演变、经典比赛与判罚规则变化，为理解新赛制提供上下文。</p>
+        <span class="meta">📚 1930–2022</span>
+      </div>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="notice-box">
+      <strong>📌 信息说明：</strong>
+      <span>本索引页面仅提供结构化的赛事知识整理，不直接发布赛程、比分或票务信息。所有内容基于官方公告及可靠体育媒体综合编写，如有变动以最新发布为准。如需获取实时资讯或官方通知，可参考 <a href="https://fifa2026-main.com">世界杯</a> 相关页面。</span>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="info-area">
+      <h2>赛事相关信息</h2>
+      <ul>
+        <li>比赛用球与科技：阿迪达斯预计发布新款智能足球，内置感应芯片辅助越位判罚。</li>
+        <li>裁判新规：VAR 系统将进一步优化，半自动越位技术已通过测试并确认应用。</li>
+        <li>转播与平台：多家国际媒体已取得授权，预计提供4K HDR与多语言解说。</li>
+        <li>环保承诺：本届赛事宣称将减少一次性塑料，并推广碳中和交通方案。</li>
+        <li>文化符号：吉祥物与官方口号计划于2025年公布，民间已出现大量创作。</li>
+      </ul>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="faq-mini">
+      <h3>常见问题 · 快速参考</h3>
+      <div class="faq-item">
+        <span class="faq-q">2026世界杯在哪看？</span>
+        <span class="faq-a">主要国际转播商包括 Fox（美国）、Bell Media（加拿大）、Televisa（墨西哥）等，具体按区域确认。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">是否有中国队参赛？</span>
+        <span class="faq-a">截至2025年初，中国队仍处于预选赛阶段，需通过后续比赛争取出线名额。</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">票务何时开放？</span>
+        <span class="faq-a">FIFA 通常于赛前一年左右启动售票，第一阶段为随机抽签申请。可以留意 <a href="https://fifa2026-main.com">世界杯</a> 官网公告。</span>
+      </div>
+    </div>
+
+    <!-- 收尾说明 -->
+    <div class="footer-note">
+      <p>本知识索引由爱好者整理，旨在提供清晰、克制的赛事信息入口。数据更新至2025年4月。页面结构和内容将随赛事进展补充迭代。</p>
+    </div>
+  </div>
+</body>
+</html>
